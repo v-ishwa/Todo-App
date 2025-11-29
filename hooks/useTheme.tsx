@@ -1,5 +1,5 @@
-import { useContext, createContext, useState, useEffect } from 'react';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { createContext, useContext, useEffect, useState } from 'react';
 
 interface ThemeContextType {
     isDarkMode: boolean;
@@ -45,6 +45,8 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
             if (value) {
                 setIsDarkMode(JSON.parse(value));
             }
+        }).catch((error) => {
+            console.error("Failed to load theme preference:", error);
         })
     }, []);
 
@@ -60,15 +62,13 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
         {children}
     </ThemeContext.Provider>
 }
-export default function useTheme() {
 
+export default function useTheme() {
     const context = useContext(ThemeContext);
     if (!context) {
         throw new Error("useTheme must be used within a ThemeProvider");
     }
-    return (
-        context
-    )
+    return context
 }
 
 const lightColors: ColorScheme = {
