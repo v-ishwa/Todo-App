@@ -35,7 +35,7 @@ export const createSettingsStyles = (colors: ColorScheme) => {
     scrollView: {
       flex: 1,
     },
-    content: {
+    contentContainer: {
       paddingHorizontal: 20,
       gap: 20,
       paddingBottom: 120,
